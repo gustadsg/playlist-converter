@@ -1,10 +1,13 @@
 import React from "react";
-import { Wrapper, Button } from "./styles";
+import { Wrapper, Button, ContentContainer } from "./styles";
 
-export default function ActionBar() {
+export default function ActionBar({ children, Icon }) {
   return (
     <Wrapper>
-      <Button>Pesquisar</Button>
+      <ContentContainer>{children}</ContentContainer>
+      <Button>
+        <Icon size={25} />
+      </Button>
     </Wrapper>
   );
 }
