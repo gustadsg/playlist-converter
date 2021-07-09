@@ -12,7 +12,7 @@ export async function searchPlaylist(id) {
 
 // sends user to login of used service
 export async function redirectToLogin() {
-  window.location.href = `https://connect.deezer.com/oauth/auth.php?app_id=${deezerAppId}&redirect_uri=${appBaseUrl}&perms=${deezerPerms}`;
+  window.location.href = `https://connect.deezer.com/oauth/auth.php?app_id=${deezerAppId}&redirect_uri=${`${appBaseUrl}?service=deezer`}&perms=${deezerPerms}`;
 }
 
 // retrieve the code from first part of authentication from url
@@ -40,4 +40,4 @@ export async function requestToken(code) {
   return accessToken;
 }
 
-export default { searchPlaylist };
+export default { searchPlaylist, redirectToLogin, retrieveCode, requestToken };
