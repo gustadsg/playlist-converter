@@ -13,6 +13,7 @@
   },
   "plugins": ["prettier"],
   "rules": {
+    "no-alert": 0,
     "import/extensions": [
       "error",
       "ignorePackages",
