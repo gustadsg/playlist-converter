@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import { useHistory } from "react-router-dom";
 
 import { AiOutlineSearch, AiOutlinePlaySquare } from "react-icons/ai";
@@ -10,14 +10,10 @@ import { ActionBar, ListBox, InvisibleInput, Icon } from "../../components";
 import deezer from "../../utils/deezer";
 import spotify from "../../utils/spotify";
 
-import secrets from "../../secrets";
-
 const services = {
   deezer,
   spotify,
 };
-
-const { deezerAppId } = secrets;
 
 export default function Home() {
   const [search, setSearch] = useState();
@@ -57,14 +53,40 @@ export default function Home() {
   }
 
   function handleServiceClick(service) {
-    setActiveService(service);
     if (!services[service]) return alert("Serviço não suportado");
-    if (service === "deezer") {
-      window.location.href = `https://connect.deezer.com/oauth/auth.php?app_id=${deezerAppId}&redirect_uri=https://60e85205db996a0007509ebd--sad-jones-2631b7.netlify.app&perms=basic_access,email,manage_library`;
-      return window.location.href;
-    }
+
+    const serviceToken = localStorage.getItem(`${service}Token`);
+    if (!serviceToken) return services?.[service]?.redirectToLogin();
+
+    setActiveService(service);
+    console.log("able to make request");
     return null;
   }
+
+  // retrieves service specified on url
+  function retrieveService() {
+    let serviceName = null;
+    const queryString = window.location.search;
+    if (queryString.length > 0) {
+      const urlParams = new URLSearchParams(queryString);
+      serviceName = urlParams.get("service");
+    }
+    setActiveService(serviceName);
+    return serviceName;
+  }
+
+  useEffect(() => {
+    // gets token if possible
+    async function run() {
+      const serviceName = retrieveService();
+      const code = services[serviceName]?.retrieveCode();
+      if (!code) return;
+      localStorage.setItem(`${serviceName}Code`, code);
+      const token = await services[serviceName]?.requestToken(code);
+      localStorage.setItem(`${serviceName}Token`, token);
+    }
+    run();
+  }, []);
 
   return (
     <Wrapper>
