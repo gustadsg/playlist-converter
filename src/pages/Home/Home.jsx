@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import { useHistory } from "react-router-dom";
 
 import { AiOutlineSearch, AiOutlinePlaySquare } from "react-icons/ai";
 import { SiDeezer, SiSpotify } from "react-icons/si";
@@ -9,10 +10,14 @@ import { ActionBar, ListBox, InvisibleInput, Icon } from "../../components";
 import deezer from "../../utils/deezer";
 import spotify from "../../utils/spotify";
 
+import secrets from "../../secrets";
+
 const services = {
   deezer,
   spotify,
 };
+
+const { deezerAppId } = secrets;
 
 export default function Home() {
   const [search, setSearch] = useState();
@@ -54,7 +59,11 @@ export default function Home() {
   function handleServiceClick(service) {
     setActiveService(service);
     if (!services[service]) return alert("Serviço não suportado");
-    return services[service];
+    if (service === "deezer") {
+      window.location.href = `https://connect.deezer.com/oauth/auth.php?app_id=${deezerAppId}&redirect_uri=https://60e85205db996a0007509ebd--sad-jones-2631b7.netlify.app&perms=basic_access,email,manage_library`;
+      return window.location.href;
+    }
+    return null;
   }
 
   return (
