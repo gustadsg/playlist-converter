@@ -8,7 +8,7 @@ export default function ListBox({ title, items }) {
     <Wrapper>
       <Title>{title}</Title>
       <ItemsContainer>
-        {items.map((item) => (
+        {items?.map((item) => (
           <ListItem title={item?.title} artist={item?.artist} key={item?.id} />
         ))}
       </ItemsContainer>

@@ -16,4 +16,6 @@ export const ItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-height: 30vh;
+  overflow: auto;
 `;

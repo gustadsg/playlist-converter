@@ -9,4 +9,9 @@ export const Input = styled.input`
 
   border: none;
   outline: none;
+
+  &::placeholder {
+    color: white;
+    opacity: 0.5;
+  }
 `;

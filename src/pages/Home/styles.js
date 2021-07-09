@@ -23,3 +23,11 @@ export const ContentContainer = styled.div`
 
   width: 500px;
 `;
+
+export const IconContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`;
