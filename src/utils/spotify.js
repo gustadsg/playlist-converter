@@ -4,3 +4,5 @@ export async function searchPlaylist(id) {
   const result = await spotifyApi.get(`/playlists/${id}`);
   return result;
 }
+
+export default { searchPlaylist };
