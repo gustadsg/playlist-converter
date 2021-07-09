@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1{
-    font-size: 50px;
+    font-size: 48px;
     color: #4C63BB;
   }
 
