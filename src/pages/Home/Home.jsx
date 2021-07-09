@@ -69,7 +69,7 @@ export default function Home() {
   return (
     <Wrapper>
       <ContentContainer>
-        <h1>Playlist Conveter</h1>
+        <h1>Playlist Converter</h1>
         <ActionBar Icon={AiOutlineSearch} onButtonClick={handleSearch}>
           {" "}
           <InvisibleInput
